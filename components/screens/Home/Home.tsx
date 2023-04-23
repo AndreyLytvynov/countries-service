@@ -6,9 +6,11 @@ import {
   Th,
   Td,
   TableContainer,
-  Flex,
   InputGroup,
   Input,
+  Box,
+  Heading,
+  Text,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -31,7 +33,6 @@ const Home: FC<any> = ({ countries }) => {
 
   const filteredAllCountries = (searchText: string) => {
     const filterCountries = countries.filter((country: any) => {
-      console.log(country.flags.png);
       return country.name.common
         .toLowerCase()
         .includes(searchText.toLowerCase());
@@ -40,51 +41,98 @@ const Home: FC<any> = ({ countries }) => {
   };
 
   return (
-    <Flex flexDir={"column"}>
-      <InputGroup size="md" w={"800px"}>
+    <Box w={"100%"}>
+      <InputGroup>
         <Input
           pr="4.5rem"
           type={"text"}
           placeholder="Enter name country"
+          _placeholder={{ color: "blackAlpha.700" }}
           onChange={handleChange}
           value={text}
         />
       </InputGroup>
-      <TableContainer w={"800px"}>
+
+      <TableContainer>
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>flag</Th>
-              <Th>name</Th>
-              <Th>area</Th>
-              <Th>common</Th>
+              <Th>
+                <Heading size="sm">flag</Heading>
+              </Th>
+              <Th p={3}>
+                <Heading size="sm">name</Heading>
+              </Th>
+              <Th
+                display={{ base: "none", md: "table-cell" }}
+                textAlign={"center"}
+              >
+                <Heading size="sm">area</Heading>
+              </Th>
+              <Th
+                display={{ base: "none", md: "table-cell" }}
+                textAlign={"center"}
+              >
+                <Heading size="sm">population</Heading>
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
-            {allCountries.map((country: any) => (
-              <Tr
-                key={country.name.common}
-                onClick={() => router.push(`/country/${country.name.common}`)}
-              >
-                <Td maxW={"200px"} h={"100%"} p={0}>
-                  <Image
-                    src={country.flags.png}
-                    alt="Picture of the author"
-                    width={50}
-                    height={50}
-                  />
-                </Td>
-                <Td w={"200px"} height={50}>
-                  {country.name.common}
-                </Td>
-                <Td>{country.population}</Td>
-                <Td>{country.area}</Td>
-              </Tr>
-            ))}
+            {allCountries.length === 0
+              ? null
+              : allCountries.map((country: any) => (
+                  <Tr
+                    h={"60px"}
+                    cursor={"pointer"}
+                    key={country.name.common}
+                    _hover={{ transform: "scale(1.02)" }}
+                    onClick={() =>
+                      router.push(`/country/${country.name.common}`)
+                    }
+                  >
+                    <Td p={0} textAlign="center" w={"60px"}>
+                      <Image
+                        src={country.flags.png}
+                        alt={country.name.common}
+                        width={60}
+                        height={60}
+                      />
+                    </Td>
+                    <Td h={"60px"} p={1}>
+                      <Text
+                        as="p"
+                        size="xs"
+                        w={{ base: "100%", md: "300px", xl: "100%" }}
+                        p={0}
+                      >
+                        {country.name.common}
+                      </Text>
+                    </Td>
+                    <Td
+                      p={1}
+                      textAlign={"center"}
+                      display={{ base: "none", md: "table-cell" }}
+                    >
+                      {country.area}
+                    </Td>
+                    <Td
+                      p={1}
+                      textAlign={"center"}
+                      display={{ base: "none", md: "table-cell" }}
+                    >
+                      {country.population}
+                    </Td>
+                  </Tr>
+                ))}
           </Tbody>
         </Table>
       </TableContainer>
-    </Flex>
+      {allCountries.length === 0 && (
+        <Text fontSize="2xl" mt={"20px"}>
+          There is no country with the letters "{text}" in its name.
+        </Text>
+      )}
+    </Box>
   );
 };
 

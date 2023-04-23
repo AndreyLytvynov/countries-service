@@ -5,13 +5,16 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 
 const Country: FC<any> = ({ country }) => {
+  console.log(country);
   const router = useRouter();
 
   return (
     <Layout>
       <Button
+        h={"20px"}
         colorScheme="teal"
-        variant="outline"
+        variant="link"
+        color={"blackAlpha.500"}
         onClick={() => router.push(`/`)}
       >
         Go back
