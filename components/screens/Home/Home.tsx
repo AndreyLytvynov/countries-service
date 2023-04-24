@@ -20,7 +20,11 @@ import TableHeadBtn from "@/components/TableHeadBtn";
 import orderBy from "@/helpers/oredrBy";
 import { ICountry } from "@/interfaces/countries";
 
-const Home: FC<any> = ({ countries }) => {
+interface ICountries {
+  countries: ICountry[];
+}
+
+const Home: FC<ICountries> = ({ countries = [] }) => {
   const [allCountries, setAllCountries] = useState<ICountry[]>(countries);
   const [text, setText] = useState<string>("");
   const [value, SetValue] = useState<string>("");
