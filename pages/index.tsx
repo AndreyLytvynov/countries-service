@@ -3,7 +3,7 @@ import Home from "@/components/screens/Home/Home";
 
 export default function IndexPage({ countries }: any) {
   return (
-    <Layout>
+    <Layout description="Countries list" title="countries">
       <Home countries={countries} />
     </Layout>
   );

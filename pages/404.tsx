@@ -14,7 +14,7 @@ const Error = () => {
   }, [router]);
 
   return (
-    <Layout>
+    <Layout description="Page not found" title="error">
       <Flex flexDir={"column"}>
         <Heading>Oops!</Heading>
         <Heading color={"red"}>

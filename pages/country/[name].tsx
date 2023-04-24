@@ -1,15 +1,15 @@
 import Layout from "@/components/Layout";
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { ICountry } from "@/interfaces/countries";
+import { Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { FC } from "react";
 
-const Country: FC<any> = ({ country }) => {
-  console.log(country);
+const Country: FC<ICountry> = ({ country }) => {
   const router = useRouter();
 
   return (
-    <Layout>
+    <Layout description="Country details" title="country">
       <Button
         h={"20px"}
         colorScheme="teal"
@@ -23,12 +23,58 @@ const Country: FC<any> = ({ country }) => {
         <Heading textAlign={"center"} noOfLines={2} maxW={"500px"}>
           {country.name.common}
         </Heading>
-        <Image
-          src={country.flags.png}
-          alt="Picture of the author"
-          width={500}
-          height={500}
-        />
+        <Flex
+          p={"5px"}
+          boxShadow={"-1px 10px 15px -4px rgba(0,0,0,0.45)"}
+          mb={"20px"}
+        >
+          <Image
+            src={country.flags.png}
+            alt="Picture of the author"
+            width={500}
+            height={500}
+          />
+        </Flex>
+        <Flex>
+          <Text fontSize="lg" fontWeight={700}>
+            Capital:&nbsp;
+          </Text>
+
+          <Text fontSize="lg"> {country.capital[0]}</Text>
+        </Flex>
+        <Flex>
+          <Text fontSize="lg" fontWeight={700}>
+            Continents:&nbsp;
+          </Text>
+          <Text fontSize="lg"> {country.continents[0]}</Text>
+        </Flex>
+        <Flex>
+          <Text fontSize="lg" fontWeight={700}>
+            Area:&nbsp;
+          </Text>
+          <Text fontSize="lg"> {country.area}</Text>
+        </Flex>
+        <Flex>
+          <Text fontSize="lg" fontWeight={700}>
+            Population:&nbsp;
+          </Text>
+          <Text fontSize="lg"> {country.population}</Text>
+        </Flex>
+        <Flex>
+          <Text fontSize="lg" fontWeight={700}>
+            Maps:&nbsp;
+          </Text>
+          <Link
+            bgColor={"#3756c6"}
+            color={"#ffffff"}
+            as={"a"}
+            fontWeight={500}
+            fontSize="lg"
+            href={country.maps.googleMaps}
+          >
+            {country.maps.googleMaps}
+          </Link>
+        </Flex>
       </Flex>
     </Layout>
   );
