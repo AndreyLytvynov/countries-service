@@ -29,7 +29,7 @@ const Country: FC<ICountry> = ({ country }) => {
           mb={"20px"}
         >
           <Image
-            src={country.flags.png}
+            src={country.flags?.png}
             alt="Picture of the author"
             width={500}
             height={500}
@@ -40,25 +40,33 @@ const Country: FC<ICountry> = ({ country }) => {
             Capital:&nbsp;
           </Text>
 
-          <Text fontSize="lg"> {country.capital[0]}</Text>
+          {country.capital ? (
+            <Text fontSize="lg"> {country.capital[0]}</Text>
+          ) : (
+            <Text fontSize="lg">no capital</Text>
+          )}
         </Flex>
         <Flex>
           <Text fontSize="lg" fontWeight={700}>
             Continents:&nbsp;
           </Text>
-          <Text fontSize="lg"> {country.continents[0]}</Text>
+          {country.continents ? (
+            <Text fontSize="lg"> {country.continents[0]}</Text>
+          ) : (
+            <Text fontSize="lg">no continents </Text>
+          )}
         </Flex>
         <Flex>
           <Text fontSize="lg" fontWeight={700}>
             Area:&nbsp;
           </Text>
-          <Text fontSize="lg"> {country.area}</Text>
+          <Text fontSize="lg"> {country?.area}</Text>
         </Flex>
         <Flex>
           <Text fontSize="lg" fontWeight={700}>
             Population:&nbsp;
           </Text>
-          <Text fontSize="lg"> {country.population}</Text>
+          <Text fontSize="lg"> {country?.population}</Text>
         </Flex>
         <Flex>
           <Text fontSize="lg" fontWeight={700}>

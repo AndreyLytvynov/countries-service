@@ -32,7 +32,7 @@ const Home: FC<ICountries> = ({ countries = [] }) => {
   const router = useRouter();
 
   const filteredCountries = orderBy(allCountries, value, direction);
-
+  console.log(filteredCountries);
   const switchDirection = () => {
     switch (direction) {
       case "":
